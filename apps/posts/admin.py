@@ -5,7 +5,7 @@ from .models import Posts
 class PostsForm(forms.ModelForm):
     class Meta:
         model = Posts
-        fields = '__all__'
+        fields = "__all__"
 
 @admin.register(Posts)
 class PostsAdmin(admin.ModelAdmin):
