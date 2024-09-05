@@ -1,11 +1,17 @@
+from django import forms
 from django.contrib import admin
 from .models import Posts
 
+class PostsForm(forms.ModelForm):
+    class Meta:
+        model = Posts
+        fields = '__all__'
+
 @admin.register(Posts)
 class PostsAdmin(admin.ModelAdmin):
+    form = PostsForm
     list_display = ("title", "slug", "pub_date", "author", "like_count", "comment_count")
     search_fields = ("title", "content", "author__username")
-    prepopulated_fields = {"slug": ("title",)}
     readonly_fields = ("like_count", "comment_count")
 
     def get_readonly_fields(self, request, obj=None):
@@ -13,8 +19,7 @@ class PostsAdmin(admin.ModelAdmin):
             return self.readonly_fields + ("slug",)
         return self.readonly_fields
 
-    def get_fields(self, request, obj=None):
-        fields = super().get_fields(request, obj)
-        if 'slug' not in fields:
-            fields = list(fields) + ['slug']
-        return fields
+    def get_prepopulated_fields(self, request, obj=None):
+        if obj:  # Editing an existing object
+            return {}  # Don't prepopulate slug for existing objects
+        return {"slug": ("title",)}  # Prepopulate slug for new objects
