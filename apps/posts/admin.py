@@ -12,3 +12,9 @@ class PostsAdmin(admin.ModelAdmin):
         if obj:  # Editing an existing object
             return self.readonly_fields + ("slug",)
         return self.readonly_fields
+
+    def get_fields(self, request, obj=None):
+        fields = super().get_fields(request, obj)
+        if 'slug' not in fields:
+            fields = list(fields) + ['slug']
+        return fields
