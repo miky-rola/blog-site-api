@@ -1,4 +1,5 @@
 from django.db import models
+
 from ..posts.models import Posts
 from ..common.models import BaseModel as base_model
 
