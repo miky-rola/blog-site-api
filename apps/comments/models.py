@@ -3,6 +3,7 @@ from django.db import models
 from ..posts.models import Posts
 from ..common.models import BaseModel as base_model
 
+
 class Comment(base_model):
     post = models.ForeignKey(Posts, on_delete=models.CASCADE, related_name="comments")
     parent_comment = models.ForeignKey(
