@@ -1,5 +1,10 @@
 from django.urls import path
-from .views import CommentListCreateView, CommentDetailView, CommentReplyView
+
+from .views import (
+    CommentListCreateView, 
+    CommentDetailView, 
+    CommentReplyView
+)
 
 urlpatterns = [
     path(r"<slug:post_slug>/comments/", CommentListCreateView.as_view(), name="comment-list-create"),

@@ -1,7 +1,9 @@
 from rest_framework import generics
+
 from .models import Comment
 from .serializers import CommentSerializer
 from ..posts.models import Posts
+
 
 class CommentListCreateView(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
@@ -15,9 +17,11 @@ class CommentListCreateView(generics.ListCreateAPIView):
         post = Posts.objects.get(slug=post_slug)
         serializer.save(post=post)
 
+
 class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+
 
 class CommentReplyView(generics.CreateAPIView):
     queryset = Comment.objects.all() 
