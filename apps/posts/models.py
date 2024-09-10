@@ -17,7 +17,19 @@ class Posts(base_model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            
+            title_without_numbers = "".join([i for i in self.title if not i.isdigit()])
+            base_slug = slugify(title_without_numbers[:50])
+        
+            self.slug = base_slug
+
+            # Save the instance to generate the ID (required for unique slug generation)
+            super().save(*args, **kwargs)
+
+            # Check if the slug already exists and append the post ID if needed
+            if Posts.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
+                self.slug = f"{base_slug}-{self.pk}"
+
         super().save(*args, **kwargs)
 
     @property

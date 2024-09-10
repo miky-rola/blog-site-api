@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib import admin
+
 from .models import Posts
 
 class PostsForm(forms.ModelForm):
@@ -21,5 +22,5 @@ class PostsAdmin(admin.ModelAdmin):
 
     def get_prepopulated_fields(self, request, obj=None):
         if obj:  # Editing an existing object
-            return {}  # Don't prepopulate slug for existing objects
+            return {} 
         return {"slug": ("title",)}  # Prepopulate slug for new objects
