@@ -18,7 +18,7 @@ class PostsSerializer(serializers.ModelSerializer):
             "title", 
             "slug", 
             "content", 
-            "pub_date", 
+            "created_at", 
             "author", 
             "image",
             "like_count", 

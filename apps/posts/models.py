@@ -8,7 +8,6 @@ class Posts(base_model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     content = models.TextField()
-    pub_date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="post_images/", blank=True, null=True)
 
@@ -23,10 +22,8 @@ class Posts(base_model):
         
             self.slug = base_slug
 
-            # Save the instance to generate the ID (required for unique slug generation)
             super().save(*args, **kwargs)
 
-            # Check if the slug already exists and append the post ID if needed
             if Posts.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
                 self.slug = f"{base_slug}-{self.pk}"
 

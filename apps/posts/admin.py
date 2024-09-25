@@ -11,7 +11,7 @@ class PostsForm(forms.ModelForm):
 @admin.register(Posts)
 class PostsAdmin(admin.ModelAdmin):
     form = PostsForm
-    list_display = ("title", "slug", "pub_date", "author", "like_count", "comment_count")
+    list_display = ("title", "slug", "created_at", "author", "like_count", "comment_count")
     search_fields = ("title", "content", "author__username")
     readonly_fields = ("like_count", "comment_count")
 
