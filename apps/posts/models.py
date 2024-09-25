@@ -11,6 +11,9 @@ class Posts(base_model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="post_images/", blank=True, null=True)
 
+    class Meta:
+        ordering = ["created_at"]
+        
     def __str__(self):
         return self.title
 
