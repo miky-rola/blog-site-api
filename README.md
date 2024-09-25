@@ -6,13 +6,13 @@
 
 1. Make sure Python 3.9 and virtualenv are already installed.
 
-2. Clone the repo and configure the virtual environment and run [pre-commit][pre-commit] for the first time:
+2. Clone the repo and configure the virtual environment:
 
 `$ python -m venv env`
 
 `$ source env/bin/activate for mac or env\scripts\activate for windows`
 
-`$ pip install -r requirements`
+`$ pip install -r requirements.txt`
 
 
 3. Set up environment variables. Examples exist in `.env.sample`:
