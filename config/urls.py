@@ -38,29 +38,20 @@ schema_view = get_schema_view(
 )
 
 
-# Authentication views for redoc and swagger
-# To Use: Replace corresponding view with these login_required views
-# Use django.contrib.auth.views.decorators.login_required() to add login to a view
-# U can also use django.contrib.admin.views.decorators.staff_member_required()
-# -------------------------------------------------------------------------------------
-# Redoc Schema
-# @staff_member_required(login_url="/login/")
+
 def redoc(request):
     return schema_view.with_ui("redoc", cache_timeout=0)(request)
 
 
-# Swagger Schema
-# @staff_member_required(login_url="/login/")
+
 def swagger(request):
     return schema_view.with_ui("swagger", cache_timeout=0)(request)
 
 
 urlpatterns = [
-    # Home and Login pages
+
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
-    path("login/", auth_views.LoginView.as_view(), name="login"),
-    # Protected API Docs
-    # -----------------------------------------------------------------------------------
+
     path("docs/", redoc, name="schema-redoc"),
     path("swagger-docs/", swagger, name="schema-swagger-ui"),
     path("admin/", admin.site.urls),
